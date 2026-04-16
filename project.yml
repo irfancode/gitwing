@@ -1,0 +1,53 @@
+name: GitWing
+options:
+  bundleIdPrefix: com.gitwing
+  deploymentTarget:
+    macOS: "14.0"
+  xcodeVersion: "16.0"
+  createIntermediateGroups: true
+  generateEmptyDirectories: true
+
+settings:
+  base:
+    MARKETING_VERSION: "1.0.0"
+    CURRENT_PROJECT_VERSION: "1"
+    SWIFT_VERSION: "5.9"
+    ENABLE_HARDENED_RUNTIME: YES
+    CODE_SIGN_IDENTITY: "-"
+    CODE_SIGN_STYLE: Automatic
+
+targets:
+  GitWing:
+    type: application
+    platform: macOS
+    sources:
+      - path: .
+        excludes:
+          - "project.yml"
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.gitwing.app
+        INFOPLIST_FILE: Info.plist
+        CODE_SIGN_ENTITLEMENTS: GitWing.entitlements
+        LD_RUNPATH_SEARCH_PATHS: "$(inherited) @executable_path/../Frameworks"
+        COMBINE_HIDPI_IMAGES: YES
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ENABLE_PREVIEWS: YES
+    info:
+      path: Info.plist
+      properties:
+        CFBundleName: GitWing
+        CFBundleDisplayName: GitWing
+        CFBundleIdentifier: $(PRODUCT_BUNDLE_IDENTIFIER)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundlePackageType: APPL
+        CFBundleExecutable: $(EXECUTABLE_NAME)
+        LSMinimumSystemVersion: $(MACOSX_DEPLOYMENT_TARGET)
+        LSUIElement: true
+        NSHighResolutionCapable: true
+        NSHumanReadableCopyright: "Copyright © 2026 GitWing. All rights reserved."
+    entitlements:
+      path: GitWing.entitlements
+      properties:
+        com.apple.security.app-sandbox: false
